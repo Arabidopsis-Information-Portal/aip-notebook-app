@@ -40,8 +40,8 @@ module.exports = function(grunt) {
           'index.html',
           'lib/*.*',
           '<%= config.app %>/{,*/}*.html',
-          '<%= config.app %>/images/{,*/}*',
-          '.tmp/styles/{,*/}*.css'
+          '<%= config.app %>/styles/{,*/}*.css',
+          '<%= config.app %>/images/{,*/}*'
         ],
         tasks: ['includes'],
         options: {
