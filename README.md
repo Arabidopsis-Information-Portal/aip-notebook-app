@@ -20,6 +20,12 @@ Your application code is in the `app/` subdirectory:
 
 ## Development
 
+First, you need to install the app's dependencies:
+
+```bash
+$ npm install && bower install
+```
+
 You can interactively develop your app using the built-in test runner. Simply
 execute this command from within the base directory of your app:
 
