@@ -1,3 +1,38 @@
-<div class="science-app" data-app-name="aip-notebook-app">
-  <h2>Hello AIP Science App!</h2>
+<div class="aip-notebook-app" data-app-name="aip-notebook-app">
+  <button type="button" class="btn btn-xs btn-default sidebar-toggle">
+    <i class="fa fa-caret-right"></i>
+    <i class="fa fa-caret-left"></i>
+  </button>
+  <div class="row">
+    <div class="col-md-9 col-md-push-3 app-main">
+      <div class="app-display">
+        <div class="app-display-inner">
+          <div class="jumbotron">
+            <p><i class="fa fa-refresh fa-spin"></i> Loading your notebooks...</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3 col-md-pull-9 app-sidebar">
+      <div class="sidebar-actions">
+        <button type="button" data-action="createNote" data-toggle="tooltip" data-placement="top" title="Create New Note" name="new-note" class="btn btn-primary"><i class="fa fa-file"></i> Note</button>
+        <button type="button" data-action="createBook" data-toggle="tooltip" data-placement="top" title="Create New Notebook" name="new-notebook" class="btn btn-primary"><i class="fa fa-book"></i> Notebook</button>
+      </div>
+
+      <ul class="nav nav-tabs" role="tablist">
+        <li class="active"><a href="#" role="tab" data-target=".notebook-books" data-toggle="tab">Notebooks</a></li>
+        <li><a href="#" role="tab" data-target=".notebook-pages" data-toggle="tab">Notes</a></li>
+      </ul>
+
+      <div class="tab-content">
+        <div class="tab-pane active notebook-books">
+          <div class="notebook-list"></div>
+        </div>
+        <div class="tab-pane notebook-pages">
+          <div class="notebook-list"></div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
