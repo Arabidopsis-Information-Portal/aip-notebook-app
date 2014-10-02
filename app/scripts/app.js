@@ -150,7 +150,7 @@
         scriptPath = 'epiceditor';
         _.each(document.querySelectorAll('script'), function(tag) {
           if (/epiceditor\/js\/epiceditor(\.min)?\.js/.test(tag.src)) {
-            scriptPath = tag.src.replace(/epiceditor\/js\/epiceditor(\.min)?\.js/, 'epiceditor');
+            scriptPath = tag.src.replace(/epiceditor\/js\/epiceditor(\.min)?\.js.*/, 'epiceditor');
           }
         });
 
