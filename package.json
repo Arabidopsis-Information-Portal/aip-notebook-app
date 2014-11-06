@@ -19,8 +19,7 @@
     "grunt-inline": "^0.3.2",
     "grunt-wiredep": "^1.9.0",
     "jshint-stylish": "^0.4.0",
-    "load-grunt-tasks": "^0.6.0",
-    "mversion": "^1.7.0"
+    "load-grunt-tasks": "^0.6.0"
   },
   "engines": {
     "node": ">= 0.10.0"
