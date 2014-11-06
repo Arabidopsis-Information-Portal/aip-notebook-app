@@ -16,7 +16,7 @@
       editor:      _.template( '<div><div class="note-meta"></div><div class="editor"></div></div>' ),
       createBook:  _.template( '<form><h1>Create a new Notebook</h1><div class="form-group"><label for="notebookName">Notebook name</label><input type="text" class="form-control" name="notebookName" id="notebookName"></div><div class="form-actions"><button type="submit" class="btn btn-success" name="save">Save</button> <button type="button" class="btn btn-default" name="cancel">Cancel</button></div></form>' ),
       createNote:  _.template( '<form><h1>Create a new Note</h1><div class="form-group"><label for="notebookId">Choose a Notebook</label><select class="form-control" name="notebookId" id="notebookId"><% _.each(books, function(book) { %><option <%= book.uuid === selected ? "selected": "" %> value="<%= book.uuid %>"><%= book.value.name %></option><% }); %></select></div><div class="form-group"><label for="noteTitle">Title</label><input type="text" class="form-control" name="noteTitle" id="noteTitle"></div><div class="form-actions"><button type="submit" class="btn btn-success" name="save">Save</button> <button type="button" class="btn btn-default" name="cancel">Cancel</button></div></form>' ),
-      displayBook: _.template( '<div class="book-display"><h1><%= book.value.name %></h1><div class="meta"><span class="label label-default pull-right"><i class="fa fa-book"></i> Notebook</span><p class="text-muted"><b>Created</b> <%= new Date(book.created).toLocaleString() %></p></div><% if (notes && notes.length > 0) { %><table class="notes table table-bordered"><% _.each(notes, function(note) { %><tr><td><%= note.value.title %></td><td><span class="text-muted"><%= new Date(note.created).toLocaleString() %></span></td><td><button data-note-uuid="<%= note.uuid %>" type="button" class="btn btn-xs btn-primary">View</button></td></tr><% });%></table><% } else { %><div class="jumbotron"><p class="alert alert-info">This notebook doesn\'t have any notes!</p><p><button type="button" class="btn btn-primary btn-lg create-note">Create a Note</button></p></div><% } %></div>' ),
+      displayBook: _.template( '<div class="book-display"><h1><%= book.value.name %></h1><div class="meta"><span class="label label-default pull-right"><i class="fa fa-book"></i> Notebook</span><p class="text-muted"><b>Created</b> <%= new Date(book.created).toLocaleString() %></p></div><% if (notes && notes.length > 0) { %><table class="notes table table-bordered"><% _.each(notes, function(note) { %><tr><td><%= note.value.title %></td><td><span class="text-muted"><%= new Date(note.created).toLocaleString() %></span></td><td><button data-note-uuid="<%= note.uuid %>" type="button" class="btn btn-xs btn-primary">View</button></td></tr><% });%></table><% } else { %><div class="jumbotron"><p class="alert alert-info">This notebook doesn\'t have any notes!</p></div><% } %><p><button type="button" class="btn btn-primary btn-lg create-note">Create a Note</button></p></div>' ),
       displayNote: _.template( '<div class="note-display"><h1><%= note.value.title %></h1><div class="meta"><span class="label label-default pull-right"><i class="fa fa-file"></i> Note</span><p class="text-muted"><b>Created</b> <%= new Date(note.created).toLocaleString() %></p></div><div class="editor"></div><div class="actions"><span class="text-muted pull-right saving-indicator"><i class="fa fa-refresh fa-spin"></i> Saving...</span><button type="button" class="btn btn-primary save">Save</button> <button type="button" class="btn btn-default preview">Preview</button> <button type="button" class="btn btn-default edit">Edit</button></div></div>' ),
       sidebarBooks: _.template( '<div class="list-group"><% _.each(items, function(item) { %><a class="list-group-item" href="#" data-type="<%= item.name %>" data-uuid="<%= item.uuid %>"><%= item.value.name %></a><% }); %></div>' ),
       sidebarNotes: _.template( '<div class="list-group"><% _.each(items, function(item) { %><a class="list-group-item" href="#" data-type="<%= item.name %>" data-uuid="<%= item.uuid %>"><%= item.value.title %></a><% }); %></div>' )
@@ -57,7 +57,8 @@
       'createNote',
       'selectBook',
       'selectNote',
-      'list'
+      'list',
+      'refresh'
     );
   };
 
@@ -130,6 +131,10 @@
           var noteUuid = $(this).attr('data-note-uuid');
           nb.currentNote = _.findWhere( nb.notes[ nb.currentBook.uuid ], { uuid: noteUuid } );
           nb.displayNote();
+        });
+        $('button.create-note').on('click', function(e) {
+          e.preventDefault();
+          nb.createNote();
         });
       })
       .done(nb.refreshSidebarNotesList)
@@ -269,7 +274,7 @@
 
         nb.meta.addMetadata( { body: JSON.stringify( note ) } , function( resp ) {
           if ( resp.status === 201 ) {
-            nb.currentNote = resp.obj;
+            nb.currentNote = resp.obj.result;
 
             // add to notes list for book
             var notes = nb.notes[ nb.currentNote.uuid ] || [];
@@ -344,14 +349,24 @@
     return deferred.promise().then(nb.displayNote);
   };
 
-  /* Listen for Agave::ready */
-  window.addEventListener('Agave::ready', function() {
-    var nb = new Notebook({el: '.aip-notebook-app', agave: window.Agave});
+  Notebook.prototype.refresh = function() {
+    var nb = this;
+
+    nb.currentBook = null;
+    nb.currentNote = null;
+    nb.books = [];
+    nb.notes = {};
+    
     nb.list().then(function() {
       if (nb.books.length > 0) {
         return nb.selectBook(nb.books[0]);
       }
     }).done(nb.displayDefault);
+  };
+
+  /* Listen for Agave::ready */
+  window.addEventListener('Agave::ready', function() {
+    new Notebook({el: '.aip-notebook-app', agave: window.Agave}).refresh();
   });
 
 })(window, jQuery, _, EpicEditor);
