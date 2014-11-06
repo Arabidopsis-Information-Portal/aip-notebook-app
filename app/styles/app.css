@@ -2,6 +2,29 @@
   position: relative;
 }
 
+.app-main,
+.app-sidebar {
+  position: relative;
+  min-height: 1px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.aip-notebook-app[min-width~="940px"] .app-main,
+.aip-notebook-app[min-width~="940px"] .app-sidebar {
+  float: left;
+}
+
+.aip-notebook-app[min-width~="940px"] .app-main {
+  width: 75%;
+  left: 25%;
+}
+
+.aip-notebook-app[min-width~="940px"] .app-sidebar {
+  width: 25%;
+  right: 75%;
+}
+
 .app-display {
   position: relative;
   min-height: 500px;
