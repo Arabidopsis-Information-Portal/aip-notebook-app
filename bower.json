@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "dependencies": {
     "underscore": "~1.7.0",
-    "epiceditor": "Arabidopsis-Information-Portal/EpicEditor#b0390dbfbb7013600c45955382e3d672bbc66d40"
+    "epiceditor": "Arabidopsis-Information-Portal/EpicEditor#b0390dbfbb7013600c45955382e3d672bbc66d40",
+    "elementQuery": "mrhanlon/elementQuery#v1.0.0"
   }
 }
