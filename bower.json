@@ -1,6 +1,6 @@
 {
   "name": "aip-notebook-app",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "dependencies": {
     "underscore": "~1.7.0",
     "epiceditor": "Arabidopsis-Information-Portal/EpicEditor#b0390dbfbb7013600c45955382e3d672bbc66d40",
