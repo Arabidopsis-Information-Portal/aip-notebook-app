@@ -2,8 +2,8 @@
   position: relative;
 }
 
-.app-main,
-.app-sidebar {
+.aip-notebook-app .app-main,
+.aip-notebook-app .app-sidebar {
   position: relative;
   min-height: 1px;
   padding-left: 15px;
@@ -25,13 +25,13 @@
   right: 75%;
 }
 
-.app-display {
+.aip-notebook-app .app-display {
   position: relative;
   min-height: 500px;
   background: #eee;
 }
 
-.app-sidebar {
+.aip-notebook-app .app-sidebar {
   position: relative;
   background-color: #fff;
   -webkit-transition: margin 0.25s ease;
@@ -40,7 +40,7 @@
   transition: margin 0.25s ease;
 }
 
-.sidebar-toggle {
+.aip-notebook-app .sidebar-toggle {
   display: none;
   -webkit-transition: all 0.25s ease;
   -moz-transition: all 0.25s ease;
@@ -48,7 +48,7 @@
   transition: all 0.25s ease;
 }
 
-.app-sidebar .sidebar-toggle {
+.aip-notebook-app .app-sidebar .sidebar-toggle {
   position: absolute;
   top: 3px;
   right: 3px;
@@ -111,35 +111,35 @@
   padding: 10px 15px;
 }
 
-.app-display-inner {
+.aip-notebook-app .app-display-inner {
   padding: 1em;
 }
 
-.table {
+.aip-notebook-app .table {
   background-color: #fff;
 }
 
-.note-display .actions {
+.aip-notebook-app .note-display .actions {
   padding-top: 13px;
   padding-bottom: 13px;
 }
 
-.note-display .actions .edit {
+.aip-notebook-app .note-display .actions .edit {
   display: none;
 }
 
-.previewing .note-display .actions .edit {
+.aip-notebook-app .previewing .note-display .actions .edit {
   display: initial;
 }
 
-.previewing .note-display .actions .preview {
+.aip-notebook-app .previewing .note-display .actions .preview {
   display: none;
 }
 
-.saving-indicator {
+.aip-notebook-app .saving-indicator {
   display: none;
 }
 
-.saving-progress .saving-indicator {
+.aip-notebook-app .saving-progress .saving-indicator {
   display: block;
 }
