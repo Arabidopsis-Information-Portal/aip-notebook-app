@@ -1,0 +1,16 @@
+{
+  "namespace" : "aip-notebook-app",
+  "name": "Scientist's Notebook",
+  "description": "An Agave meta-powered notebook application. Support for markdown included.",
+  "html": "app.html",
+  "scripts": [
+    "scripts/app.js"
+  ],
+  "styles": [
+    "styles/app.css"
+  ],
+  "tags": [
+    "agave", "metadata", "markdown"
+  ],
+  "icon": "app/images/logo.png"
+}
